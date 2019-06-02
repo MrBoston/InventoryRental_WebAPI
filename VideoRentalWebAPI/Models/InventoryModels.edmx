@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InventoryRentalsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Rental">
+          <Key>
+            <PropertyRef Name="RentalId" />
+          </Key>
+          <Property Name="RentalId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CheckedOutDate" Type="datetime" Nullable="false" />
+          <Property Name="CheckedInDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentalItem">
+          <Key>
+            <PropertyRef Name="RentalItemId" />
+          </Key>
+          <Property Name="RentalItemId" Type="int" Nullable="false" />
+          <Property Name="RentalId" Type="int" Nullable="false" />
+          <Property Name="ToolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="int" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Rental__Customer__145C0A3F">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Rental">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalIte__Renta__173876EA">
+          <End Role="Rental" Type="Self.Rental" Multiplicity="1" />
+          <End Role="RentalItem" Type="Self.RentalItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rental">
+              <PropertyRef Name="RentalId" />
+            </Principal>
+            <Dependent Role="RentalItem">
+              <PropertyRef Name="RentalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalIte__ToolI__182C9B23">
+          <End Role="Tool" Type="Self.Tool" Multiplicity="1" />
+          <End Role="RentalItem" Type="Self.RentalItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="RentalItem">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryRentalsModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rental" EntityType="Self.Rental" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentalItem" EntityType="Self.RentalItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tool" EntityType="Self.Tool" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Rental__Customer__145C0A3F" Association="Self.FK__Rental__Customer__145C0A3F">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Rental" EntitySet="Rental" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalIte__Renta__173876EA" Association="Self.FK__RentalIte__Renta__173876EA">
+            <End Role="Rental" EntitySet="Rental" />
+            <End Role="RentalItem" EntitySet="RentalItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalIte__ToolI__182C9B23" Association="Self.FK__RentalIte__ToolI__182C9B23">
+            <End Role="Tool" EntitySet="Tool" />
+            <End Role="RentalItem" EntitySet="RentalItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryRentalsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rentals" Relationship="Self.FK__Rental__Customer__145C0A3F" FromRole="Customer" ToRole="Rental" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Rental">
+          <Key>
+            <PropertyRef Name="RentalId" />
+          </Key>
+          <Property Name="RentalId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CheckedOutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CheckedInDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Rental__Customer__145C0A3F" FromRole="Rental" ToRole="Customer" />
+          <NavigationProperty Name="RentalItems" Relationship="Self.FK__RentalIte__Renta__173876EA" FromRole="Rental" ToRole="RentalItem" />
+        </EntityType>
+        <EntityType Name="RentalItem">
+          <Key>
+            <PropertyRef Name="RentalItemId" />
+          </Key>
+          <Property Name="RentalItemId" Type="Int32" Nullable="false" />
+          <Property Name="RentalId" Type="Int32" Nullable="false" />
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rental" Relationship="Self.FK__RentalIte__Renta__173876EA" FromRole="RentalItem" ToRole="Rental" />
+          <NavigationProperty Name="Tool" Relationship="InventoryRentalsModel.FK__RentalIte__ToolI__182C9B231" FromRole="RentalItem" ToRole="Tool" />
+        </EntityType>
+        <Association Name="FK__Rental__Customer__145C0A3F">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Rental">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RentalIte__Renta__173876EA">
+          <End Role="Rental" Type="Self.Rental" Multiplicity="1" />
+          <End Role="RentalItem" Type="Self.RentalItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rental">
+              <PropertyRef Name="RentalId" />
+            </Principal>
+            <Dependent Role="RentalItem">
+              <PropertyRef Name="RentalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryRentalsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Rentals" EntityType="Self.Rental" />
+          <EntitySet Name="RentalItems" EntityType="Self.RentalItem" />
+          <AssociationSet Name="FK__Rental__Customer__145C0A3F" Association="Self.FK__Rental__Customer__145C0A3F">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Rental" EntitySet="Rentals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RentalIte__Renta__173876EA" Association="Self.FK__RentalIte__Renta__173876EA">
+            <End Role="Rental" EntitySet="Rentals" />
+            <End Role="RentalItem" EntitySet="RentalItems" />
+          </AssociationSet>
+          <EntitySet Name="Tools" EntityType="InventoryRentalsModel.Tool" />
+          <AssociationSet Name="FK__RentalIte__ToolI__182C9B231" Association="InventoryRentalsModel.FK__RentalIte__ToolI__182C9B231">
+            <End Role="Tool" EntitySet="Tools" />
+            <End Role="RentalItem" EntitySet="RentalItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tool">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="Int32" Nullable="false" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RentalItems" Relationship="InventoryRentalsModel.FK__RentalIte__ToolI__182C9B231" FromRole="Tool" ToRole="RentalItem" />
+        </EntityType>
+        <Association Name="FK__RentalIte__ToolI__182C9B231">
+          <End Type="InventoryRentalsModel.Tool" Role="Tool" Multiplicity="1" />
+          <End Type="InventoryRentalsModel.RentalItem" Role="RentalItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="RentalItem">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryRentalsModelStoreContainer" CdmEntityContainer="InventoryRentalsEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="InventoryRentalsModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentals">
+            <EntityTypeMapping TypeName="InventoryRentalsModel.Rental">
+              <MappingFragment StoreEntitySet="Rental">
+                <ScalarProperty Name="RentalId" ColumnName="RentalId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CheckedOutDate" ColumnName="CheckedOutDate" />
+                <ScalarProperty Name="CheckedInDate" ColumnName="CheckedInDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentalItems">
+            <EntityTypeMapping TypeName="InventoryRentalsModel.RentalItem">
+              <MappingFragment StoreEntitySet="RentalItem">
+                <ScalarProperty Name="RentalItemId" ColumnName="RentalItemId" />
+                <ScalarProperty Name="RentalId" ColumnName="RentalId" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tools">
+            <EntityTypeMapping TypeName="InventoryRentalsModel.Tool">
+              <MappingFragment StoreEntitySet="Tool">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryRentalsModelStoreContainer" CdmEntityContainer="InventoryRentalsEntities">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="InventoryRentalsModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rentals">
+      <EntityTypeMapping TypeName="InventoryRentalsModel.Rental">
+        <MappingFragment StoreEntitySet="Rental">
+          <ScalarProperty Name="RentalId" ColumnName="RentalId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CheckedOutDate" ColumnName="CheckedOutDate" />
+          <ScalarProperty Name="CheckedInDate" ColumnName="CheckedInDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RentalItems">
+      <EntityTypeMapping TypeName="InventoryRentalsModel.RentalItem">
+        <MappingFragment StoreEntitySet="RentalItem">
+          <ScalarProperty Name="RentalItemId" ColumnName="RentalItemId" />
+          <ScalarProperty Name="RentalId" ColumnName="RentalId" />
+          <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tools">
+      <EntityTypeMapping TypeName="InventoryRentalsModel.Tool">
+        <MappingFragment StoreEntitySet="Tool">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
