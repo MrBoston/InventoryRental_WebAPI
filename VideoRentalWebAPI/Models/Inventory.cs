@@ -12,21 +12,22 @@ namespace VideoRentalWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Inventory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Inventory()
         {
-            this.Rentals = new HashSet<Rental>();
+            this.RentalItems = new HashSet<RentalItem>();
         }
     
-        public int CustomerId { get; set; }
-        public string FName { get; set; }
-        public string LName { get; set; }
-        public string Phone_ { get; set; }
-        public string Email { get; set; }
+        public int ToolId { get; set; }
+        public string Brand { get; set; }
+        public string Description { get; set; }
+        public bool Active { get; set; }
+        public string Comment { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rental> Rentals { get; set; }
+        public virtual ICollection<RentalItem> RentalItems { get; set; }
     }
 }

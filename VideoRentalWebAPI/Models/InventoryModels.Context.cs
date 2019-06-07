@@ -26,8 +26,8 @@ namespace VideoRentalWebAPI.Models
         }
     
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Rental> Rentals { get; set; }
         public virtual DbSet<RentalItem> RentalItems { get; set; }
-        public virtual DbSet<Tool> Tools { get; set; }
     }
 }

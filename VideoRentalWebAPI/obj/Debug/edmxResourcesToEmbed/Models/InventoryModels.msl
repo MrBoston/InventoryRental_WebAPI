@@ -4,11 +4,22 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="InventoryRentalsModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="FName" ColumnName="FName" />
           <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Phone_" ColumnName="Phone#" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="InventoryRentalsModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -27,18 +38,6 @@
         <MappingFragment StoreEntitySet="RentalItem">
           <ScalarProperty Name="RentalItemId" ColumnName="RentalItemId" />
           <ScalarProperty Name="RentalId" ColumnName="RentalId" />
-          <ScalarProperty Name="ToolId" ColumnName="ToolId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Tools">
-      <EntityTypeMapping TypeName="InventoryRentalsModel.Tool">
-        <MappingFragment StoreEntitySet="Tool">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
           <ScalarProperty Name="ToolId" ColumnName="ToolId" />
         </MappingFragment>
       </EntityTypeMapping>

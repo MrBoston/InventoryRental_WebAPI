@@ -18,7 +18,7 @@ namespace VideoRentalWebAPI.Models
         public int RentalId { get; set; }
         public int ToolId { get; set; }
     
+        public virtual Inventory Inventory { get; set; }
         public virtual Rental Rental { get; set; }
-        public virtual Tool Tool { get; set; }
     }
 }

@@ -10,23 +10,23 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using VideoRentalWebAPI.Models;
 
-namespace VideoRentalWebAPI.Controllers
+namespace InventoryRentalWebAPI.Controllers
 {
-    public class ToolsController : ApiController
+    public class MoviesController : ApiController
     {
         private InventoryRentalsEntities db = new InventoryRentalsEntities();
 
         // GET: api/Tools
-        public IQueryable<Tool> GetTools()
+        public IQueryable<Inventory> GetTools()
         {
-            return db.Tools;
+            return db.Inventories;
         }
 
         // GET: api/Tools/5
-        [ResponseType(typeof(Tool))]
+        [ResponseType(typeof(Inventory))]
         public IHttpActionResult GetTool(int id)
         {
-            Tool tool = db.Tools.Find(id);
+            Inventory tool = db.Inventories.Find(id);
             if (tool == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace VideoRentalWebAPI.Controllers
 
         // PUT: api/Tools/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTool(int id, Tool tool)
+        public IHttpActionResult PutTool(int id, Inventory tool)
         {
             if (!ModelState.IsValid)
             {
@@ -71,46 +71,31 @@ namespace VideoRentalWebAPI.Controllers
         }
 
         // POST: api/Tools
-        [ResponseType(typeof(Tool))]
-        public IHttpActionResult PostTool(Tool tool)
+        [ResponseType(typeof(Inventory))]
+        public IHttpActionResult PostTool(Inventory tool)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Tools.Add(tool);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (ToolExists(tool.ToolId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.Inventories.Add(tool);
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = tool.ToolId }, tool);
         }
 
         // DELETE: api/Tools/5
-        [ResponseType(typeof(Tool))]
+        [ResponseType(typeof(Inventory))]
         public IHttpActionResult DeleteTool(int id)
         {
-            Tool tool = db.Tools.Find(id);
+            Inventory tool = db.Inventories.Find(id);
             if (tool == null)
             {
                 return NotFound();
             }
 
-            db.Tools.Remove(tool);
+            db.Inventories.Remove(tool);
             db.SaveChanges();
 
             return Ok(tool);
@@ -127,7 +112,7 @@ namespace VideoRentalWebAPI.Controllers
 
         private bool ToolExists(int id)
         {
-            return db.Tools.Count(e => e.ToolId == id) > 0;
+            return db.Inventories.Count(e => e.ToolId == id) > 0;
         }
     }
 }

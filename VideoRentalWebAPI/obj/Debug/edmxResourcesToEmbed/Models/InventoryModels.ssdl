@@ -7,8 +7,18 @@
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="FName" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="LName" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="Phone" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Phone#" Type="varchar" MaxLength="16" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="ToolId" />
+    </Key>
+    <Property Name="ToolId" Type="int" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Rental">
     <Key>
@@ -26,17 +36,6 @@
     <Property Name="RentalItemId" Type="int" Nullable="false" />
     <Property Name="RentalId" Type="int" Nullable="false" />
     <Property Name="ToolId" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Tool">
-    <Key>
-      <PropertyRef Name="ToolId" />
-    </Key>
-    <Property Name="ToolId" Type="int" Nullable="false" />
-    <Property Name="Brand" Type="varchar" MaxLength="25" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
-    <Property Name="Active" Type="bit" Nullable="false" />
-    <Property Name="Comment" Type="varchar" MaxLength="255" />
-    <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <Association Name="FK__Rental__Customer__145C0A3F">
     <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -63,10 +62,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__RentalIte__ToolI__182C9B23">
-    <End Role="Tool" Type="Self.Tool" Multiplicity="1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
     <End Role="RentalItem" Type="Self.RentalItem" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Tool">
+      <Principal Role="Inventory">
         <PropertyRef Name="ToolId" />
       </Principal>
       <Dependent Role="RentalItem">
@@ -76,9 +75,9 @@
   </Association>
   <EntityContainer Name="InventoryRentalsModelStoreContainer">
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rental" EntityType="Self.Rental" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RentalItem" EntityType="Self.RentalItem" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Tool" EntityType="Self.Tool" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Rental__Customer__145C0A3F" Association="Self.FK__Rental__Customer__145C0A3F">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Rental" EntitySet="Rental" />
@@ -88,7 +87,7 @@
       <End Role="RentalItem" EntitySet="RentalItem" />
     </AssociationSet>
     <AssociationSet Name="FK__RentalIte__ToolI__182C9B23" Association="Self.FK__RentalIte__ToolI__182C9B23">
-      <End Role="Tool" EntitySet="Tool" />
+      <End Role="Inventory" EntitySet="Inventory" />
       <End Role="RentalItem" EntitySet="RentalItem" />
     </AssociationSet>
   </EntityContainer>

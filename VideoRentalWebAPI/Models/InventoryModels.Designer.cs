@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\student\Documents\#Vis2019 T\tariq\Assignment\InventoryRentalWebAPI\VideoRentalWebAPI\Models\InventoryModels.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Tafe\Tafe 2019\Malan\Assignment\VideoRentalWebAPI\VideoRentalWebAPI\Models\InventoryModels.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
